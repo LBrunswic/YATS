@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+{% load bootstrap_toolkit i18n boards menu %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>YATS: {% block title %}{{ title }}{% endblock %}</title>
+    <meta name="description" content="">
+    <meta name="author" content="media factory">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ STATIC_URL }}icons/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="{{ STATIC_URL }}icons/favicon.ico">
+    <link rel="icon" type="image/gif" href="{{ STATIC_URL }}icons/favicon.gif">
+    <link rel="icon" type="image/png" href="{{ STATIC_URL }}icons/favicon.png">
+    <link rel="apple-touch-icon" href="{{ STATIC_URL }}icons/apple-touch-icon.png">
+    <link rel="apple-touch-icon" href="{{ STATIC_URL }}icons/apple-touch-icon-57x57.png" sizes="57x57">
+    <link rel="apple-touch-icon" href="{{ STATIC_URL }}icons/apple-touch-icon-60x60.png" sizes="60x60">
+    <link rel="apple-touch-icon" href="{{ STATIC_URL }}icons/apple-touch-icon-72x72.png" sizes="72x72">
+    <link rel="apple-touch-icon" href="{{ STATIC_URL }}icons/apple-touch-icon-76x76.png" sizes="76x76">
+    <link rel="apple-touch-icon" href="{{ STATIC_URL }}icons/apple-touch-icon-114x114.png" sizes="114x114">
+    <link rel="apple-touch-icon" href="{{ STATIC_URL }}icons/apple-touch-icon-120x120.png" sizes="120x120">
+    <link rel="apple-touch-icon" href="{{ STATIC_URL }}icons/apple-touch-icon-128x128.png" sizes="128x128">
+    <link rel="apple-touch-icon" href="{{ STATIC_URL }}icons/apple-touch-icon-144x144.png" sizes="144x144">
+    <link rel="apple-touch-icon" href="{{ STATIC_URL }}icons/apple-touch-icon-152x152.png" sizes="152x152">
+    <link rel="apple-touch-icon" href="{{ STATIC_URL }}icons/apple-touch-icon-180x180.png" sizes="180x180">
+    <link rel="apple-touch-icon" href="{{ STATIC_URL }}icons/apple-touch-icon-precomposed.png">
+    <link rel="icon" type="image/png" href="{{ STATIC_URL }}icons/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="{{ STATIC_URL }}icons/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="{{ STATIC_URL }}icons/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="{{ STATIC_URL }}icons/favicon-160x160.png" sizes="160x160">
+    <link rel="icon" type="image/png" href="{{ STATIC_URL }}icons/favicon-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="{{ STATIC_URL }}icons/favicon-196x196.png" sizes="196x196">
+    <meta name="msapplication-TileImage" content="{{ STATIC_URL }}icons/win8-tile-144x144.png">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-navbutton-color" content="#ffffff">
+    <meta name="msapplication-square70x70logo" content="{{ STATIC_URL }}icons/win8-tile-70x70.png">
+    <meta name="msapplication-square144x144logo" content="{{ STATIC_URL }}icons/win8-tile-144x144.png">
+    <meta name="msapplication-square150x150logo" content="{{ STATIC_URL }}icons/win8-tile-150x150.png">
+    <meta name="msapplication-wide310x150logo" content="{{ STATIC_URL }}icons/win8-tile-310x150.png">
+    <meta name="msapplication-square310x310logo" content="{{ STATIC_URL }}icons/win8-tile-310x310.png">
+    {% bootstrap_stylesheet_tag %}
+    {% bootstrap_stylesheet_tag "responsive" %}
+    <link href="{{ STATIC_URL }}base.css" type="text/css" rel="stylesheet" media="all">
+    <!--[if lt IE 9]>
+    <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.0/jquery.min.js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    {% bootstrap_javascript_tag %}
+    {% block extra_head %}
+    {% endblock %}
+    <style>
+      div.container.pull-left.yats-navi {width: auto;}
+
+      @media only screen and (max-width: 993px) {
+        body {
+            padding-top: 0px;
+        }
+
+        .modal textarea {
+          height: 170px !important;
+      }
+      }
+    </style>
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+    {% if request.user.is_authenticated %}
+    <div class="navbar-inner">
+        <div class="container-float yats-navi">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand " id="brand" href="/">&nbsp;&nbsp;&nbsp;<img src="{{ STATIC_URL }}icons/favicon-16x16.png" /> {% YATSName %}</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              {% board_list %}
+              {% SimpleSerch %}
+
+              {% if request.session.isUsingYATSE %}
+              <li><a href="{% YATSServer %}/board/" class="">{% trans "board" %}</a></li>
+                <li><a href="{% YATSServer %}/tickets/search/" class="">{% trans "search" %}</a></li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% trans "New" %}<b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                      <li><a href="{% if simple_search %}/tickets/simple/{% else %}/tickets/new/{% endif %}" class="">{% trans "New ticket" %}</a></li>
+                      <li><a href="/docs/new/" class="">{% trans "New document" %}</a></li>
+                  </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% trans "local" %}<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                      <li><a href="/reports/" class="">{% trans "Reports" %}</a></li>
+                      <li class="dropdown-submenu">
+                          <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% trans "Boards" %}<b class="caret"></b></a>
+                          <ul class="dropdown-menu">
+                              <li><a data-toggle="modal" href="#newBoardDlg">{% trans "add new board" %}</a></li>
+                          {% for board in boards %}
+                              <li><a href="/board/{{ board.name|urlencode }}/">{{ board.name }}</a></li>
+                          {% endfor %}
+                          </ul>
+                      </li>
+                      <li><a href="/kanban/" class="">{% trans "Kanban" %}</a></li>
+                      <li><a href="/tickets/search/" class="">{% trans "Search" %}</a></li>
+                      <li><a href="/log/" class="">{% trans "Logs" %}</a></li>
+                      <li><a href="/workflow/" class="">{% trans "Workflow" %}</a></li>
+                      <li><a href="/info/" class="">{% trans "Info" %}</a></li>
+                      {% if request.user.is_staff %}<li><a href="/admin/" class="">{% trans "Admin" %}</a></li>{% endif %}
+                    </ul>
+                </li>
+                {% else %}
+                <li><a href="/reports/" class="">{% trans "Reports" %}</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% trans "Boards" %}<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a data-toggle="modal" href="#newBoardDlg">{% trans "add new board" %}</a></li>
+                    {% board_list %}
+                    {% for board in boards %}
+                        <li><a href="/board/{{ board.name|urlencode }}/">{{ board.name }}</a></li>
+                    {% endfor %}
+                    </ul>
+                </li>
+                <li><a href="/kanban/" class="">{% trans "Kanban" %}</a></li>
+                <li><a href="/tickets/search/" class="">{% trans "Search" %}</a></li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% trans "New" %}<b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                      <li><a href="{% if simple_search %}/tickets/simple/{% else %}/tickets/new/{% endif %}" class="">{% trans "New ticket" %}</a></li>
+                      <li><a href="/docs/new/" class="">{% trans "New document" %}</a></li>
+                  </ul>
+                </li>
+                <li><a href="/log/" class="">{% trans "Logs" %}</a></li>
+                <li><a href="/workflow/" class="">{% trans "Workflow" %}</a></li>
+                <li><a href="/info/" class="">{% trans "Info" %}</a></li>
+                {% if request.user.is_staff %}<li><a href="/admin/" class="">{% trans "Admin" %}</a></li>{% endif %}
+                {% endif %}
+            </ul>
+
+            <form class="navbar-form pull-left" method="get" action="/search/">
+              <div class="form-group">
+                <input type="text" class="typeahead form-control search-query span2" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Volltext" name="q" value="{{ request.GET.q }}" />
+                <input type="hidden" name="models" value="yats.docs" />
+                <input type="hidden" name="models" value="web.test" />
+              </div>
+            </form>
+
+            <ul class="nav pull-right">
+              <li class="dropdown">
+                <a href="#" style="color: #0088cc;" class="dropdown-toggle" data-toggle="dropdown">{{ request.user }}@{{ request.organisation.name }} <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><a data-toggle="modal" href="#pwdDlg">{% trans "change password" %}</a></li>
+                  <li class="divider"></li>
+                  <li><a href="/local_logout/" class="">{% trans "Logout" %}</a></li>
+                </ul>
+              </li>
+            </ul>
+
+          </div><!--/.nav-collapse -->
+        </div>
+
+    </div>
+    {% endif %}
+</div>
+
+{% if request.session.breadcrumbs %}
+    <ul class="breadcrumb">
+        {% for bread in request.session.breadcrumbs %}
+        <li>
+            {% if bread.1 == '#' %}<a href="/tickets/view/{{ bread.0 }}/">{% if bread.2 %}<i class="fa fa-bug" aria-hidden="true"></i> #{{ bread.0 }} {{ bread.2|truncatechars:19 }}{% else %}@{{ bread.0 }}{% endif %}</a>{% endif %}
+            {% if bread.1 == '@' %}<a href="/reports/?report={{ bread.0 }}">{% if bread.2 %}<i class="fa fa-bars" aria-hidden="true"></i> {{ bread.2 }}{% else %}@{{ bread.0 }}{% endif %}</a>{% endif %}
+            {% if bread.1 == '$' %}<a href="/board/{{ bread.0|urlencode }}/">${{ bread.0|truncatechars:19 }}</a>{% endif %}
+            {% if bread.1 == 'k' %}<a href="/kanban/"><i class="fa fa-tasks" aria-hidden="true"></i> Kanban</a>{% endif %}
+            {% if bread.1 == '*' %}<a href="/docs/view/{{ bread.0 }}/">{% if bread.2 %}<i class="fa fa-wikipedia-w" aria-hidden="true"></i> {{ bread.2|truncatechars:19 }}{% else %}@{{ bread.0 }}{% endif %}</a>{% endif %}
+            {% if not forloop.last %}<span class="divider">|</span>{% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+<div class="container">
+
+    {% bootstrap_messages %}
+
+    {% block content %}Empty page{% endblock %}
+
+</div> <!-- container -->
+
+{% block footer %}
+<div class="container">
+    <footer class="row">
+      <p><hr /></p>
+
+        <div class="span6">
+            {{ SETTINGS.CUSTOMER }}<br />
+            {{ SETTINGS.TEL }}<br />
+            {{ SETTINGS.MAIL }}<br />
+        </div>
+        <div class="span6" style="text-align:right">
+            <p>
+                &copy; 2014 - {% now "Y" %} <a href="http://www.mediafactory.de">media factory</a>
+            </p>
+        </div>
+    </footer>
+</div>
+{% endblock %}
+
+<div id="pwdDlg" class="modal hide fade">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>{% trans "change password" %}</h3>
+    </div>
+
+    <form class="form-{{ layout }}" action="/" method="post">
+    <div class="modal-body">
+      <div>
+        <label for="id_password">{% trans "Password" %}:</label> <input type="password" name="password" id="id_password" />
+        <label for="id_password">{% trans "Validate password" %}:</label> <input type="password" name="password_check" id="id_password_check" />
+      </div>
+    </div>
+
+    <div class="modal-footer">
+        <a href="#" class="btn" data-dismiss="modal">{% trans "cancel" %}</a>
+        <input type="submit" value="{% trans "change" %}" class="btn btn-primary">
+    </div>
+    </form>
+</div>
+
+<div id="newBoardDlg" class="modal hide fade">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>{% trans "new board" %}</h3>
+    </div>
+
+    <form class="form-{{ layout }}" action="/board/to_add/" method="post">
+    <div class="modal-body">
+		<div class="control-group">
+		    <label class="control-label" for="id_deadline">{% trans "board name" %}</label>
+		    <div class="controls">
+		        <div class="input-append boardname">
+		            <input id="id_boardname" name="boardname" type="text" />
+		        </div>
+		    </div>
+		</div>
+    </div>
+
+    <div class="modal-footer">
+        <a href="#" class="btn" data-dismiss="modal">{% trans "cancel" %}</a>
+        <input type="submit" value="{% trans "save" %}" class="btn btn-primary">
+    </div>
+    </form>
+</div>
+<script type="text/javascript">
+
+ $('input.typeahead').typeahead({
+     source:  function (query, process) {
+        return $.get('/search/auto/', { q: query }, function (data) {
+           process(data);
+         });
+     },
+     matcher: function (item) {
+       return true;
+     }
+ });
+
+</script>
+</body>
+</html>

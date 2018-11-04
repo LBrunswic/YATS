@@ -1,0 +1,69 @@
+- wiki
+  => TOC
+  => Links zu anderen Docs
+  => Ticket erstellen
+  => history
+  => Breadcrumb
+  => YATSEE
+  => Logs
+- Gruppen
+- igrnore seen => abrechnen
+- checksum & virusscan in PUT
+- check, if close is allowed in DAV
+- Fortschirtt in ToDos
+- recycle old tasks => e.g. take every day 3 automatically, random from a que e.g. waiting and put them in entry again.
+- Ticketliste + edit & view
+- add or remove me from Teilnehmerlist => remove from ignorants
+- undo seen
+
+- move extra search in search from yatse
+
+- forgot password
+- detect SSL
+- css boards / kanban on mobile
+- better map prio of apple to yats
+- highlight ticket view if deadline
+- special fields => geo in DAV
+- Kanban Board Settings: limit Columns, my or my and non asssigned, max days finished
+- boards für andere Spalten: z.B. Komponenten + eine mit unassigned oder user
+- Filter über dem Board: Assigned (my, my and none, all or even user), Componenten
+
+---- WISHLIST
+- Vorlangen von Tickets
+- Wiederkehrende Aufgaben
+=> jeden Tag
+=> jede Woche
+=> jeder x. des Monats
+
+- neuer Comment von wem in Mail
+- change collision.. => even in CalDAV => recheck ETag again in PUT (1 == 1)
+- api ticket change after close...
+- Lösung gelöscht: won&#39;t fix in comment
+- move deadline to tickets => change to datetime...? + func - datetime
+- csv export
+- customers are allowed to close tickets???
+- save and reassign without mail...
+- RPC => like TRAC
+
+- versions not sorted
+- timeline / gant / roadmap => https://jsganttimproved.github.io/jsgantt-improved/ => https://ourcodeworld.com/articles/read/434/top-5-best-free-jquery-and-javascript-dynamic-gantt-charts-for-web-applications
+- ticket dependencies => followed by ticket (parent / ancestors)
+- rss feed
+
+- search sort order
+- search + not, contains, > (datetime)
+- reportman
+
+- import from TRAC
+
+- wiki integration
+
+- mail templates
+- mail html diff of ticket changes
+- rights
+- webdav oder new version for files
+
+http://getbootstrap.com/2.3.2/base-css.html#buttons
+http://marcoceppi.github.io/bootstrap-glyphicons/
+http://www.bootply.com/106768
+http://jsfiddle.net/KyleMit/gDjtk/

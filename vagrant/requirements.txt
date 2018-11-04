@@ -1,0 +1,17 @@
+Django==1.11.14
+diff-match-patch
+Markdown>2.2.0
+six
+pillow
+pydevd
+itsdangerous
+webservices[django]
+defusedxml
+pyclamd
+dnspython
+vobject
+monotonic
+SpeechRecognition
+django-markdownx
+django-haystack
+xapian-haystack
